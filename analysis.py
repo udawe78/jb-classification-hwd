@@ -1,15 +1,22 @@
 import tensorflow as tf
 import numpy as np
+import pandas as pd
 from sklearn.model_selection import train_test_split
 
-x_train, y_train = tf.keras.datasets.mnist.load_data()[0]
+features, target = tf.keras.datasets.mnist.load_data()[0]
 
-x_train = np.reshape(x_train, (x_train.shape[0], x_train.shape[1] * x_train.shape[2]))
+features = np.reshape(features, (features.shape[0], features.shape[1] * features.shape[2]))
 
-print(f"Classes: {np.unique(y_train)}",
-      f"Features' shape: {x_train.shape}",
-      f"Target's shape: {y_train.shape}",
-      f"min: {x_train.min()}, max: {x_train.max()}", sep='\n')
+features = pd.DataFrame(features)
+target = pd.Series(target)
 
-x_train, x_test, y_train, y_test = train_test_split(x_train[:6000], y_train[:6000],
+x_train, x_test, y_train, y_test = train_test_split(features[:6000], target[:6000],
                                                     test_size=0.3, random_state=40)
+
+print(f"x_train shape: {x_train.shape}",
+      f"x_test shape: {x_test.shape}",
+      f"y_train shape: {y_train.shape}",
+      f"y_test shape: {y_test.shape}",
+      f"Proportion of samples per class in train set:",
+      y_train.value_counts(normalize=True),
+      sep='\n')
