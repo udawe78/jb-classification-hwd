@@ -21,15 +21,11 @@ x_train_norm, x_test_norm = Normalizer().transform(x_train), Normalizer().transf
 models = [('K-nearest neighbors', KNeighborsClassifier(), {'n_neighbors': (3, 4),
                                                            'weights': ('uniform', 'distance'),
                                                            'algorithm': ('auto', 'brute')
-                                                           }
-           ),
+                                                           }),
           ('Random forest', RandomForestClassifier(random_state=40), {'n_estimators': (300, 500),
                                                                       'max_features': ('auto', 'log2'),
                                                                       'class_weight': ('balanced', 'balanced_subsample')
-                                                                      }
-           )
-          ]
-
+                                                                      })]
 for item in models:
     gs = GridSearchCV(item[1], item[2], scoring='accuracy', n_jobs=-1)
     gs.fit(x_train_norm, y_train)
