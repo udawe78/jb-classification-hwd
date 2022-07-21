@@ -31,4 +31,4 @@ for item in models:
     gs.fit(x_train_norm, y_train)
     print(f"{item[0]} algorithm"
           f"\nbest estimator: {gs.best_estimator_}"
-          f"\naccuracy: {gs.score(x_test_norm, y_test)}\n"
+          f"\naccuracy: {gs.score(x_test_norm, y_test)}\n")
