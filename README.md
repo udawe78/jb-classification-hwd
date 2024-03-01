@@ -1,2 +1,2 @@
 # jb-classification-hwd
-Classification of Handwritten Digits
+Classification of Handwritten Digits Using TensorFlow
